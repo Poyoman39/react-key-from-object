@@ -1,0 +1,32 @@
+{
+  "name": "react-key-from-object",
+  "version": "0.0.1",
+  "description": "Generate react keys from objects",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Poyoman39/react-key-from-object.git"
+  },
+  "keywords": [
+    "react",
+    "key",
+    "reference",
+    "object",
+    "map"
+  ],
+  "author": "Johan Maupetit",
+  "license": "LGPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/Poyoman39/react-key-from-object/issues"
+  },
+  "homepage": "https://github.com/Poyoman39/react-key-from-object#readme",
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.13.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1"
+  }
+}
