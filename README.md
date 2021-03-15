@@ -33,18 +33,24 @@ The problem here is our dog "names" are not unique ... So we would need to gener
 
 In some situations this is fastidious ... that's the here ***react-key-from-object*** comes !
 
-    // import { useKeyGen } from 'react-key-from-object'
-    // const keyGen = useKeyGen();
+    import { useKeyGen } from 'react-key-from-object'
+    
+    const DogList = () => {
+      const keyGen = useKeyGen();
 
-    <ul>
-      {dogs.map((dog) => (
-        <li key={keyGen.getKey(dog)}>
-          {dog.name}
-          -
-          {dog.age}
-        </li>
-      ))
-    </ul>
+      return (
+        <ul>
+          {dogs.map((dog) => (
+            <li key={keyGen.getKey(dog)}>
+              {dog.name}
+              -
+              {dog.age}
+            </li>
+          ))
+        </ul>
+      );
+    }
+
 This will associate an unique key to your object (without mutating it).
 
 Want to know how it works ? Have a look to the source code, it's really tiny !
@@ -58,18 +64,23 @@ You **MUST NOT** use this library if you need to rely on [react reconciliation](
 
 ### The hook way (recommended)
 
-    // import { useKeyGen } from 'react-key-from-object'
-    // const keyGen = useKeyGen();
+    import { useKeyGen } from 'react-key-from-object'
+    
+    const DogList = () => {
+      const keyGen = useKeyGen();
 
-    <ul>
-      {dogs.map((dog) => (
-        <li key={keyGen.getKey(dog)}>
-          {dog.name}
-          -
-          {dog.age}
-        </li>
-      ))
-    </ul>
+      return (
+        <ul>
+          {dogs.map((dog) => (
+            <li key={keyGen.getKey(dog)}>
+              {dog.name}
+              -
+              {dog.age}
+            </li>
+          ))
+        </ul>
+      );
+    }
 
 ### The "classic" way
 
@@ -84,4 +95,3 @@ You **MUST NOT** use this library if you need to rely on [react reconciliation](
     keyGen.getKey(u); // keyGen_1
     keyGen.getKey(t); // keyGen_0
     keyGen.getKey({}); // keyGen_2
-    
