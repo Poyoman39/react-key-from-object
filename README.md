@@ -33,23 +33,15 @@ The problem here is our dog "names" are not unique ... So we would need to gener
 
 In some situations this is fastidious ... that's the here ***react-key-from-object*** comes !
 
-    import { useKeyGen } from 'react-key-from-object'
-    
-    const DogList = () => {
-      const keyGen = useKeyGen();
-
-      return (
-        <ul>
-          {dogs.map((dog) => (
-            <li key={keyGen.getKey(dog)}>
-              {dog.name}
-              -
-              {dog.age}
-            </li>
-          ))
-        </ul>
-      );
-    }
+    <ul>
+      {dogs.map((dog) => (
+        <li key={keyGen.getKey(dog)}>
+          {dog.name}
+          -
+          {dog.age}
+        </li>
+      ))
+    </ul>
 
 This will associate an unique key to your object (without mutating it).
 
