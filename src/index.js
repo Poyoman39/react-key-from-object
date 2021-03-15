@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+
 function ReactKeyGen({
   keyBaseName = 'keyGen_',
 } = {}) {
@@ -28,6 +30,10 @@ function ReactKeyGen({
   };
 }
 
-useKeyGen
+export const useKeyGen = () => {
+  const keyGen = useMemo(() => new ReactKeyGen(), []);
+
+  return keyGen;
+};
 
 export default ReactKeyGen;
