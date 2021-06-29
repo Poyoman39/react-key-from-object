@@ -1,3 +1,5 @@
+const compatibleKeyTypes = ['object', 'function'];
+
 function ReactKeyGen({
   keyBaseName = 'keyGen_',
 } = {}) {
@@ -14,6 +16,10 @@ function ReactKeyGen({
   })();
 
   this.getKey = (whatever) => {
+    if (!compatibleKeyTypes.includes(typeof whatever)) {
+      return whatever
+    }
+
     const key = keysMap.get(whatever);
 
     if (key) {
