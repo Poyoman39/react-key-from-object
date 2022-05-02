@@ -5,7 +5,7 @@ Generate react keys from objects / functions ... anything
 
 ## Goal
 
-When using lists in React you need to [use keys](https://reactjs.org/docs/lists-and-keys.html) on items to let react know which array item is associated with wich visual.
+When using lists in React you need to [use keys](https://reactjs.org/docs/lists-and-keys.html) on items to let React know which array item is associated with which visual.
 
 To do that you have to specify a **unique string** as a *key* prop.
 
@@ -17,7 +17,7 @@ Let's consider you have this array:
       { name: "Perle", age: 12 },
     ];
 
-So we would have a react list looking like this
+So we would have a React list looking like this:
 
     <ul>
       {dogs.map((dog) => (
@@ -29,9 +29,9 @@ So we would have a react list looking like this
       ))
     </ul>
 
-The problem here is our dog "names" are not unique ... So we would need to generate a unique ID to every dogs.
+The problem here is our dog "names" are not unique ... So we would need to generate a unique ID for every dog.
 
-In some situations this is fastidious ... that's the here ***react-key-from-object*** comes !
+In some situations, this is tedious ... that's where ***react-key-from-object*** comes in!
 
     <ul>
       {dogs.map((dog) => (
@@ -43,11 +43,11 @@ In some situations this is fastidious ... that's the here ***react-key-from-obje
       ))
     </ul>
 
-This will associate an unique key to your object (without mutating it).
+This will associate a unique key for your object (without mutating it).
 
-Want to know how it works ? Have a look to the source code, it's really tiny !
+Want to know how it works? Have a look to the source code, it's really tiny!
 
-## When not to use it
+## When NOT to use it
 
 You **MUST NOT** use this library if you need to rely on [react reconciliation](https://reactjs.org/docs/reconciliation.html)
 *(So if you are using server side rendering for instance)*
