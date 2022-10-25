@@ -19,7 +19,7 @@ function ReactKeyGen({
     if (!compatibleKeyTypes.includes(typeof whatever)
       || !whatever
     ) {
-      return whatever.toString ? whatever.toString() : whatever;
+      return whatever?.toString ? whatever.toString() : whatever;
     }
 
     const key = keysMap.get(whatever);
