@@ -1,7 +1,12 @@
-const compatibleKeyTypes = ['object', 'function'];
+const isPrimitive = (value) => !value || !['object', 'function'].includes(typeof value);
+
+const defaultPrimitiveToKey = (value) => (
+  value?.toString ? value.toString() : value
+);
 
 function ReactKeyGen({
   keyBaseName = 'keyGen_',
+  primitiveToKey = defaultPrimitiveToKey,
 } = {}) {
   const keysMap = new WeakMap();
 
@@ -15,14 +20,12 @@ function ReactKeyGen({
     };
   })();
 
-  this.getKey = (whatever) => {
-    if (!compatibleKeyTypes.includes(typeof whatever)
-      || !whatever
-    ) {
-      return whatever?.toString ? whatever.toString() : whatever;
+  this.getKey = (value) => {
+    if (isPrimitive(value)) {
+      return primitiveToKey(value);
     }
 
-    const key = keysMap.get(whatever);
+    const key = keysMap.get(value);
 
     if (key) {
       return key;
@@ -30,7 +33,7 @@ function ReactKeyGen({
 
     const newKey = getUniqueKey();
 
-    keysMap.set(whatever, newKey);
+    keysMap.set(value, newKey);
 
     return newKey;
   };

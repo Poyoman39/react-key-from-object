@@ -1,8 +1,18 @@
-import { useMemo } from 'react';
+import { useMemo, useRef } from 'react';
 import ReactKeyGen from './index';
 
 const useKeyGen = () => {
-  const keyGen = useMemo(() => new ReactKeyGen(), []);
+  const getKeyCounterRef = useRef(0);
+
+  getKeyCounterRef.current = 0;
+
+  const keyGen = useMemo(() => new ReactKeyGen({
+    primitiveToKey: () => {
+      getKeyCounterRef.current += 1;
+
+      return getKeyCounterRef.current;
+    },
+  }), []);
 
   return keyGen;
 };
