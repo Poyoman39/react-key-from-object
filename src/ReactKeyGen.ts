@@ -1,15 +1,28 @@
-type Primitive = string | number | boolean | null | undefined;
+import type { Key } from 'react';
 
 const isPrimitive = (value: unknown): boolean =>
   !value || !['object', 'function'].includes(typeof value);
 
-const defaultPrimitiveToKey = (value: Primitive): Primitive =>
-  value?.toString ? value.toString() : value;
+const defaultPrimitiveToKey = (value: unknown): Key | null | undefined => {
+  if (value === null || value === undefined) {
+    return value;
+  }
+
+  if (typeof value === 'number') {
+    return value;
+  }
+
+  if (typeof (value as { toString: () => string }).toString === 'function') {
+    return value.toString();
+  }
+
+  return String(value);
+};
 
 class ReactKeyGen {
   #keysMap = new WeakMap<object, string>();
   #keyBaseName: string;
-  #primitiveToKey: (value: Primitive) => Primitive;
+  #primitiveToKey: (value: unknown) => Key | null | undefined;
   #cpt = -1;
 
   constructor({ keyBaseName = 'keyGen_', primitiveToKey = defaultPrimitiveToKey } = {}) {
@@ -22,9 +35,9 @@ class ReactKeyGen {
     return `${this.#keyBaseName}${this.#cpt}`;
   }
 
-  getKey(value: unknown): Primitive {
+  getKey(value: unknown): Key | null | undefined {
     if (isPrimitive(value)) {
-      return this.#primitiveToKey(value as Primitive);
+      return this.#primitiveToKey(value);
     }
 
     if (typeof value === 'object' && value !== null) {
@@ -39,7 +52,7 @@ class ReactKeyGen {
       return newKey;
     }
 
-    return this.#primitiveToKey(value as Primitive);
+    return this.#primitiveToKey(value);
   }
 }
 

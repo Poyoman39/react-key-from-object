@@ -1,7 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const isPrimitive = (value) => !value || !['object', 'function'].includes(typeof value);
-const defaultPrimitiveToKey = (value) => value?.toString ? value.toString() : value;
+const defaultPrimitiveToKey = (value) => {
+    if (value === null || value === undefined) {
+        return value;
+    }
+    if (typeof value === 'number') {
+        return value;
+    }
+    if (typeof value.toString === 'function') {
+        return value.toString();
+    }
+    return String(value);
+};
 class ReactKeyGen {
     #keysMap = new WeakMap();
     #keyBaseName;
