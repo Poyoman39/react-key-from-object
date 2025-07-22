@@ -6,13 +6,17 @@ const useKeyGen = () => {
 
   getKeyCounterRef.current = 0;
 
-  const keyGen = useMemo(() => new ReactKeyGen({
-    primitiveToKey: () => {
-      getKeyCounterRef.current += 1;
+  const keyGen = useMemo(
+    () =>
+      new ReactKeyGen({
+        primitiveToKey: () => {
+          getKeyCounterRef.current += 1;
 
-      return getKeyCounterRef.current;
-    },
-  }), []);
+          return getKeyCounterRef.current;
+        },
+      }),
+    []
+  );
 
   return keyGen;
 };
