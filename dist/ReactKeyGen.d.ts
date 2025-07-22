@@ -1,10 +1,10 @@
-type Primitive = string | number | boolean | null | undefined;
+import type { Key } from 'react';
 declare class ReactKeyGen {
     #private;
     constructor({ keyBaseName, primitiveToKey }?: {
         keyBaseName?: string | undefined;
-        primitiveToKey?: ((value: Primitive) => Primitive) | undefined;
+        primitiveToKey?: ((value: unknown) => Key | null | undefined) | undefined;
     });
-    getKey(value: unknown): Primitive;
+    getKey(value: unknown): Key | null | undefined;
 }
 export default ReactKeyGen;
